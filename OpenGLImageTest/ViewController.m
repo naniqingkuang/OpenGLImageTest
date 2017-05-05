@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "GLKImageView.h"
 
 @interface ViewController ()
 
@@ -16,6 +17,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    GLKImageView *imageView = [[GLKImageView alloc] initWithFrame:CGRectMake(0, 100, 200, 320)];
+
+    [self.view addSubview:imageView];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIImage *image =[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"timg" ofType:@"jpg"]];
+        imageView.image = image;
+    });
     // Do any additional setup after loading the view, typically from a nib.
 }
 
